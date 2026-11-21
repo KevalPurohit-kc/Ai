@@ -1,0 +1,77 @@
+import itertools
+import math
+
+
+cities = {
+    0: (0, 0),
+    1: (2, 4),
+    2: (5, 2),
+    3: (6, 6),
+    4: (1, 5)
+}
+
+
+def distance(c1, c2):
+
+
+    x1, y1 = cities[c1]
+    x2, y2 = cities[c2]
+
+    
+    return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+
+
+
+def path_length(path):
+
+    total = 0
+
+   
+    for i in range(len(path)):
+        total += distance(path[i], path[(i + 1) % len(path)])
+
+   
+    return total
+
+
+
+def solve_tsp():
+
+   
+    city_ids = list(cities.keys())
+
+ 
+    start = city_ids[0]
+
+    
+    rest = city_ids[1:]
+
+    best_path = None
+    best_length = float('inf')
+
+  
+    for perm in itertools.permutations(rest):
+
+        
+        path = [start] + list(perm)
+
+        # Calculate the total distance of the current route
+        length = path_length(path)
+
+        # Check whether the current route is shorter
+        if length < best_length:
+
+            # Update the shortest route and distance
+            best_length = length
+            best_path = path
+
+    # Return the shortest route and its distance
+    return best_path, best_length
+
+
+# Call the function to find the optimal route
+best_path, best_length = solve_tsp()
+
+# Display the shortest route and total distance
+print("Best route:", best_path + [best_path[0]])
+print("Total distance:", round(best_length, 2))
