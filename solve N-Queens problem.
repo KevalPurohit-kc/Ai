@@ -1,12 +1,5 @@
 # Check whether a queen can be placed safely
-'''
-board[row] = col: Places a queen at the specified row and column.
-is_safe(): Checks whether the queen shares a column or diagonal with an existing queen.
-solve_nqueens(): Uses recursion to place queens row by row.
-solutions.append(board[:]): Saves a copy of each valid solution.
-board[row] = -1: Removes the queen when backtracking.
-len(solutions): Counts the total number of valid arrangements.
-'''
+
 def is_safe(board, row, col):
     # Check all previously placed queens
     for i in range(row):
